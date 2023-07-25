@@ -10,8 +10,13 @@ const Page = () => {
   ]);
 
   const handleAddButton = () => {
+    if (itemInput.trim() === "") return;
     setList([...list, { label: itemInput, checked: false }]);
     setItemInput("");
+  };
+
+  const deleteItem = (index: number) => {
+    setList(list.filter((item, key) => key !== index));
   };
 
   return (
@@ -31,10 +36,15 @@ const Page = () => {
       <p className="my-4">{list.length} itens na lista</p>
 
       <ul className="w-full max-w-lg list-disc pl-5">
-        {list.map((item) => (
-          <li>
+        {list.map((item, index) => (
+          <li key={index}>
             {item.label} -
-            <button className="hover:underline">[ deletar ]</button>
+            <button
+              onClick={() => deleteItem(index)}
+              className="hover:underline"
+            >
+              [ deletar ]
+            </button>
           </li>
         ))}
       </ul>

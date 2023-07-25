@@ -5,16 +5,13 @@ import { useState } from "react";
 const Page = () => {
   const [itemInput, setItemInput] = useState("");
   const [list, setList] = useState<TodoItem[]>([
-    { id: 1, label: "Fazer dever de casa", checked: false },
-    { id: 2, label: "Comprar o bolo", checked: false },
+    { id: 0, label: "Fazer dever de casa", checked: false },
+    { id: 1, label: "Comprar o bolo", checked: false },
   ]);
 
   const handleAddButton = () => {
     if (itemInput.trim() === "") return;
-    setList([
-      ...list,
-      { id: list.length + 1, label: itemInput, checked: false },
-    ]);
+    setList([...list, { id: Date.now(), label: itemInput, checked: false }]);
     setItemInput("");
   };
 
